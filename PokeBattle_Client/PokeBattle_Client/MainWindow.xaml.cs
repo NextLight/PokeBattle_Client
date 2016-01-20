@@ -24,14 +24,25 @@ namespace PokeBattle_Client
         public MainWindow()
         {
             InitializeComponent();
-
-            server = new Server("127.0.0.1");
         }
 
-        private async void button_Click(object sender, RoutedEventArgs e)
+        private async void btnConnect_Click(object sender, RoutedEventArgs e)
         {
+            gridConnection.Visibility = Visibility.Hidden;
+            server = new Server(txtIP.Text);
             await server.Connect();
-            textBox.Text = string.Join("\n\n", (await server.ReadPokeTeam()).AsEnumerable());
+            Pokemon[] pokeTeam = await server.ReadPokeTeam();
+            try
+            {
+                img1.Source = GetPokemonImage(pokeTeam[0].Id);
+            }
+            catch { }
+            lblName.Content = pokeTeam[0].Name;
+        }
+
+        private BitmapImage GetPokemonImage(int id)
+        {
+            return new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\sprites\\" + id + ".png", UriKind.Absolute));
         }
     }
 }

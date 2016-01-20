@@ -4,6 +4,7 @@ namespace PokeBattle_Client
 {
     class Pokemon
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public Tuple<int, int?> Types { get; set; }
@@ -15,10 +16,5 @@ namespace PokeBattle_Client
         public int SpecialDefense { get; set; }
         public int Speed { get; set; }
         public int Nature { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Name} : lvl. {Level}\nHp: {Hp}\nAttack: {Attack}\nDefense: {Defense}\nSpecialAttack: {SpecialAttack}\nSpecialDefense: {SpecialDefense}\nSpeed: {Speed}";
-        }
     }
 }
