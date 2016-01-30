@@ -37,7 +37,7 @@ namespace PokeBattle_Client
                 img1.Source = GetPokemonImage(pokeTeam[0].Id);
             }
             catch { }
-            lblName.Content = pokeTeam[0].Name;
+            hpb1.DataContext = pokeTeam[0];
         }
 
         private BitmapImage GetPokemonImage(int id)

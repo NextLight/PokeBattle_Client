@@ -54,10 +54,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HPBar.xaml.cs">
+      <DependentUpon>HPBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JSTupleConverter.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="Server.cs" />
+    <Page Include="HPBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
