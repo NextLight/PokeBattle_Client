@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media.Imaging;
 
 namespace PokeBattle_Client
 {
@@ -16,5 +17,27 @@ namespace PokeBattle_Client
         public int SpecialDefense { get; set; }
         public int Speed { get; set; }
         public int Nature { get; set; }
+
+        public class InBattleClass
+        {
+            public int Hp { get; set; }
+            // TODO: status modifiers
+        }
+        public InBattleClass InBattle = new InBattleClass();
+
+        private BitmapImage Image
+        {
+            get 
+            {
+                try
+                {
+                    return new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\sprites\\" + Id + ".png", UriKind.Absolute));
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
