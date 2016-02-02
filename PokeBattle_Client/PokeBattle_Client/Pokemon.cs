@@ -23,9 +23,9 @@ namespace PokeBattle_Client
             public int Hp { get; set; }
             // TODO: status modifiers
         }
-        public InBattleClass InBattle = new InBattleClass();
+        public InBattleClass InBattle { get; set; }
 
-        private BitmapImage Image
+        public BitmapImage Image
         {
             get 
             {
