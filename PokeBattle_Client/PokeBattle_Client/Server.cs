@@ -7,6 +7,7 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using System.Web.Script.Serialization;
+using System.IO;
 
 namespace PokeBattle_Client
 {
@@ -14,14 +15,13 @@ namespace PokeBattle_Client
     {
         TcpClient client;
         NetworkStream stream;
+        StreamReader streamReader;
         JavaScriptSerializer serializer;
 
         public Server(string ip)
         {
             this.Ip = ip;
             client = new TcpClient();
-            serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
         }
 
         public string Ip { get; set; }
@@ -30,39 +30,26 @@ namespace PokeBattle_Client
         {
             await client.ConnectAsync(IPAddress.Parse(this.Ip), 9073);
             stream = client.GetStream();
+            streamReader = new StreamReader(stream);
         }
 
-        // quite ugly tbh
-        public async Task<byte[]> ReadBytes(int bufferSize = 1024)
+        public async Task<string> ReadLine()
         {
-            List<byte> res = new List<byte>();
-            byte[] buffer = new byte[bufferSize];
-            do
-            {
-                int len = await stream.ReadAsync(buffer, 0, bufferSize);
-                res.AddRange(buffer.Take(len));
-            } while (stream.DataAvailable);
-            return res.ToArray();
-        }
-
-        public async Task<byte> ReadByte()
-        {
-            return (await ReadBytes(1))[0];
-        }
-
-        public async Task<string> ReadString()
-        {
-            return Encoding.ASCII.GetString(await ReadBytes());
+            return await streamReader.ReadLineAsync();
         }
 
         public async Task<Pokemon> ReadPokemon()
         {
-            return serializer.Deserialize<Pokemon>(await ReadString());
+            string s = await ReadLine();
+            return serializer.Deserialize<Pokemon>(s);
         }
 
         public async Task<Pokemon[]> ReadPokeTeam()
         {
-            return serializer.Deserialize<Pokemon[]>(await ReadString());
+            serializer = new JavaScriptSerializer();
+            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
+            string s = await ReadLine();
+            return serializer.Deserialize<Pokemon[]>(s);
         }
     }
 }
