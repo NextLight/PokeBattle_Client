@@ -2,8 +2,8 @@
 
 namespace PokeBattle_Client
 {
-    enum DamageClass { None = 1, Physical, Special };
-    class Move
+    public enum DamageClass { None = 1, Physical, Special };
+    public class Move
     {
         public string Name { get; set; }
         public int? Power { get; set; }

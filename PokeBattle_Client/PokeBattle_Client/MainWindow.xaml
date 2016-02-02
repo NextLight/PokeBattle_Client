@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:PokeBattle_Client"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PokeBattle_Client.MainWindow"
-        Title="MainWindow" Height="408" Width="640">
+        Title="MainWindow" Height="550" Width="640">
     <Grid>
         <Grid x:Name="gridConnection" d:IsHidden="True" >
             <TextBox x:Name="txtIP" HorizontalAlignment="Center" Height="23" Margin="0,0,0,40" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Center" Width="75" Click="btnConnect_Click"/>
         </Grid>
-        <Grid>
+        <Grid Margin="0,0,0,100">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -17,5 +17,6 @@
             <local:PokemonView x:Name="pokev2" />
             <local:PokemonView x:Name="pokev1" ImageSide="Left" Grid.Row="1" />
         </Grid>
+        <local:MovePicker x:Name="movePick" Height="100" VerticalAlignment="Bottom" MoveSelected="movePick_MoveSelected" />
     </Grid>
 </Window>

@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PokeBattle_Client
 {
@@ -22,19 +11,27 @@ namespace PokeBattle_Client
             InitializeComponent();
         }
 
-        public event EventHandler MoveSelected;
+        public event EventHandler<MoveSelectedArgs> MoveSelected;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (MoveSelected != null)
             {
-                MoveSelected(this, );
+                Button btn = (Button)sender;
+                MoveSelected(this, new MoveSelectedArgs((Move)btn.DataContext, GetRow(btn) * 2 + GetColumn(btn)));
             }
         }
     }
 
-    class MoveSelectedArgs : EventArgs
+    public class MoveSelectedArgs : EventArgs
     {
+        public Move SelectedMove { get; private set; }
+        public int SelectedIndex { get; private set; }
 
+        public MoveSelectedArgs(Move move, int idx)
+        {
+            SelectedMove = move;
+            SelectedIndex = idx;
+        }
     }
 }

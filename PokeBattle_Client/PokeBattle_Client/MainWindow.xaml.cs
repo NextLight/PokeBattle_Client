@@ -38,7 +38,12 @@ namespace PokeBattle_Client
             opponent = await server.ReadPokemon();
             pokev1.DataContext = pokeTeam[0];
             pokev2.DataContext = opponent;
+            movePick.DataContext = pokeTeam[0].Moves;
         }
-        
+
+        private void movePick_MoveSelected(object sender, MoveSelectedArgs e)
+        {
+            // TODO
+        }
     }
 }
