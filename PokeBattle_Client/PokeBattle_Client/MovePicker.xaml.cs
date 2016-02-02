@@ -15,14 +15,26 @@ using System.Windows.Shapes;
 
 namespace PokeBattle_Client
 {
-    /// <summary>
-    /// Logica di interazione per HPBar.xaml
-    /// </summary>
-    public partial class HPBar : Grid
+    public partial class MovePicker : Grid
     {
-        public HPBar()
+        public MovePicker()
         {
             InitializeComponent();
         }
+
+        public event EventHandler MoveSelected;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (MoveSelected != null)
+            {
+                MoveSelected(this, );
+            }
+        }
+    }
+
+    class MoveSelectedArgs : EventArgs
+    {
+
     }
 }
