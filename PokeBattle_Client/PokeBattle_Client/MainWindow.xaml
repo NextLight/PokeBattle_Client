@@ -14,8 +14,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <local:PokemonView x:Name="pokev1" />
-            <local:PokemonView x:Name="pokev2" ImageSide="Left" Grid.Row="1" />
+            <local:PokemonView x:Name="pokev2" />
+            <local:PokemonView x:Name="pokev1" ImageSide="Left" Grid.Row="1" />
         </Grid>
     </Grid>
 </Window>

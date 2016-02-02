@@ -22,6 +22,8 @@ namespace PokeBattle_Client
     {
         Server server;
         Pokemon[] pokeTeam;
+        Pokemon opponent;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +35,10 @@ namespace PokeBattle_Client
             server = new Server(txtIP.Text);
             await server.Connect();
             pokeTeam = await server.ReadPokeTeam();
+            opponent = await server.ReadPokemon();
+            pokev1.DataContext = pokeTeam[0];
+            pokev2.DataContext = opponent;
         }
+        
     }
 }
