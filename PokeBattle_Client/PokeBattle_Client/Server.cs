@@ -14,11 +14,14 @@ namespace PokeBattle_Client
     {
         TcpClient client;
         NetworkStream stream;
-        
+        JavaScriptSerializer serializer;
+
         public Server(string ip)
         {
             this.Ip = ip;
             client = new TcpClient();
+            serializer = new JavaScriptSerializer();
+            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
         }
 
         public string Ip { get; set; }
@@ -52,10 +55,13 @@ namespace PokeBattle_Client
             return Encoding.ASCII.GetString(await ReadBytes());
         }
 
+        public async Task<Pokemon> ReadPokemon()
+        {
+            return serializer.Deserialize<Pokemon>(await ReadString());
+        }
+
         public async Task<Pokemon[]> ReadPokeTeam()
         {
-            var serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
             return serializer.Deserialize<Pokemon[]>(await ReadString());
         }
     }
