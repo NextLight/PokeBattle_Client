@@ -21,6 +21,7 @@ namespace PokeBattle_Client
     public partial class MainWindow : Window
     {
         Server server;
+        Pokemon[] pokeTeam;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,18 +32,7 @@ namespace PokeBattle_Client
             gridConnection.Visibility = Visibility.Hidden;
             server = new Server(txtIP.Text);
             await server.Connect();
-            Pokemon[] pokeTeam = await server.ReadPokeTeam();
-            try
-            {
-                img1.Source = GetPokemonImage(pokeTeam[0].Id);
-            }
-            catch { }
-            hpb1.DataContext = pokeTeam[0];
-        }
-
-        private BitmapImage GetPokemonImage(int id)
-        {
-            return new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\sprites\\" + id + ".png", UriKind.Absolute));
+            pokeTeam = await server.ReadPokeTeam();
         }
     }
 }

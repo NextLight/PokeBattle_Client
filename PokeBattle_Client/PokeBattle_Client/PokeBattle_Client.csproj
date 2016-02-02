@@ -54,14 +54,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HPBar.xaml.cs">
-      <DependentUpon>HPBar.xaml</DependentUpon>
+    <Compile Include="PokemonView.xaml.cs">
+      <DependentUpon>PokemonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="JSTupleConverter.cs" />
     <Compile Include="Move.cs" />
+    <Compile Include="MovePicker.xaml.cs">
+      <DependentUpon>MovePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pokemon.cs" />
     <Compile Include="Server.cs" />
-    <Page Include="HPBar.xaml">
+    <Page Include="PokemonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -77,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MovePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

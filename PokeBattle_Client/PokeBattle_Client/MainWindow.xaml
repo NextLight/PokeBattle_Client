@@ -14,8 +14,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Image x:Name="img1" Margin="0,10,10,10" HorizontalAlignment="Right" Width="{Binding Height}"/>
-            <local:HPBar x:Name="hpb1" />
+            <local:PokemonView x:Name="pokev1" />
+            <local:PokemonView x:Name="pokev2" ImageSide="Left" Grid.Row="1" />
         </Grid>
     </Grid>
 </Window>
