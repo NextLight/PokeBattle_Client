@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
 
 namespace PokeBattle_Client
 {
-    class Pokemon
+    class Pokemon : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,12 +19,16 @@ namespace PokeBattle_Client
         public int Speed { get; set; }
         public int Nature { get; set; }
 
-        public class InBattleClass
+        InBattleClass inBattle;
+        public InBattleClass InBattle
         {
-            public int Hp { get; set; }
-            // TODO: status modifiers
+            get { return inBattle; }
+            set
+            {
+                inBattle = value;
+                OnPropertyChanged("InBattle");
+            }
         }
-        public InBattleClass InBattle { get; set; }
 
         public BitmapImage Image
         {
@@ -39,5 +44,22 @@ namespace PokeBattle_Client
                 }
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+    }
+
+    public class InBattleClass
+    {
+        public int Hp { get; set; }
+        // TODO: status modifiers
     }
 }

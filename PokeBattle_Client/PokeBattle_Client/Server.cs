@@ -31,6 +31,8 @@ namespace PokeBattle_Client
             await client.ConnectAsync(IPAddress.Parse(this.Ip), 9073);
             stream = client.GetStream();
             streamReader = new StreamReader(stream);
+            serializer = new JavaScriptSerializer();
+            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
         }
 
         public async Task<string> ReadLine()
@@ -40,16 +42,17 @@ namespace PokeBattle_Client
 
         public async Task<Pokemon> ReadPokemon()
         {
-            string s = await ReadLine();
-            return serializer.Deserialize<Pokemon>(s);
+            return serializer.Deserialize<Pokemon>(await ReadLine());
         }
 
         public async Task<Pokemon[]> ReadPokeTeam()
         {
-            serializer = new JavaScriptSerializer();
-            serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
-            string s = await ReadLine();
-            return serializer.Deserialize<Pokemon[]>(s);
+            return serializer.Deserialize<Pokemon[]>(await ReadLine());
+        }
+
+        public async Task<InBattleClass> ReadInBattle()
+        {
+            return serializer.Deserialize<InBattleClass>(await ReadLine());
         }
 
         // Each turn turn the player can either use a move (0) or change the active pokemon (1)

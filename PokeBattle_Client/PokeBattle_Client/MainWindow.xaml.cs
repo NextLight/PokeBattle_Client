@@ -41,9 +41,11 @@ namespace PokeBattle_Client
             movePick.DataContext = pokeTeam[0].Moves;
         }
 
-        private void movePick_MoveSelected(object sender, MoveSelectedArgs e)
+        private async void movePick_MoveSelected(object sender, MoveSelectedArgs e)
         {
-            server.SendMove(e.SelectedIndex);
+            await server.SendMove((byte)e.SelectedIndex);
+            pokeTeam[0].InBattle = await server.ReadInBattle();
+            opponent.InBattle = await server.ReadInBattle();
         }
     }
 }
