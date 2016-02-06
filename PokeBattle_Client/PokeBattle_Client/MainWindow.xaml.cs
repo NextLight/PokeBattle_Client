@@ -43,7 +43,7 @@ namespace PokeBattle_Client
 
         private void movePick_MoveSelected(object sender, MoveSelectedArgs e)
         {
-            // TODO
+            server.SendMove(e.SelectedIndex);
         }
     }
 }

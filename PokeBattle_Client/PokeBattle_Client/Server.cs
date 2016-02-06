@@ -51,5 +51,17 @@ namespace PokeBattle_Client
             string s = await ReadLine();
             return serializer.Deserialize<Pokemon[]>(s);
         }
+
+        // Each turn turn the player can either use a move (0) or change the active pokemon (1)
+
+        public async Task SendMove(byte moveIdx)
+        {
+            await stream.WriteAsync(new byte[] { 0, moveIdx }, 0, 2);
+        }
+
+        public async Task SendChangePokemon(byte pokemonIdx)
+        {
+            await stream.WriteAsync(new byte[] { 1, pokemonIdx }, 0, 2);
+        }
     }
 }
