@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PokeBattle_Client
 {
-    class Pokemon : INotifyPropertyChanged
+    public class Pokemon : INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Name { get; set; }

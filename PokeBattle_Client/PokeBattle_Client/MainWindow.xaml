@@ -18,5 +18,6 @@
             <local:PokemonView x:Name="pokev1" ImageSide="Left" Grid.Row="1" />
         </Grid>
         <local:MovePicker x:Name="movePick" Height="100" VerticalAlignment="Bottom" MoveSelected="movePick_MoveSelected" />
+        <local:PokemonPicker x:Name="pokePicker" Margin="80,52,82,105"></local:PokemonPicker>
     </Grid>
 </Window>

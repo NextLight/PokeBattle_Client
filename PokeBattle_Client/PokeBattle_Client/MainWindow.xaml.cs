@@ -36,6 +36,7 @@ namespace PokeBattle_Client
             await server.Connect();
             pokeTeam = await server.ReadPokeTeam();
             opponent = await server.ReadPokemon();
+            pokePicker.PokeTeam = pokeTeam;
             pokev1.DataContext = pokeTeam[0];
             pokev2.DataContext = opponent;
             movePick.DataContext = pokeTeam[0].Moves;
