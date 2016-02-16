@@ -36,6 +36,7 @@ namespace PokeBattle_Client
             }
         }
 
+        // ??
         int selectedPokemonIndex = 0;
         public int SelectedPokemonIndex
         {
@@ -46,6 +47,25 @@ namespace PokeBattle_Client
                 Items.Insert(0, PokeTeam[selectedPokemonIndex]);
                 Items.Remove(PokeTeam[selectedPokemonIndex]);
             }
+        }
+
+        public event EventHandler<PickedPokemonArgs> Picked;
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedIndex != -1 && Picked != null)
+                Picked(this, new PickedPokemonArgs(pokeTeam[SelectedIndex], SelectedIndex));
+        }
+    }
+
+    public class PickedPokemonArgs : EventArgs
+    {
+        public Pokemon PickedPokemon { get; private set; }
+        public int PickedIndex { get; private set; }
+        
+        public PickedPokemonArgs(Pokemon poke, int idx)
+        {
+            PickedPokemon = poke;
+            PickedIndex = idx;
         }
     }
 }
