@@ -22,14 +22,30 @@ namespace PokeBattle_Client
             InitializeComponent();
         }
 
+        Side imageSide = Side.Right;
+
+        private void UpdateGridHPMargin()
+        {
+            gridHP.Margin = new Thickness(imageSide == Side.Left ? img.ActualWidth + 10 : 10, 0, imageSide == Side.Right ? img.ActualWidth + 10 : 10, 0);
+        }
+
         public Side ImageSide
         {
             set
             {
+                imageSide = value;
                 img.HorizontalAlignment = value.ToAlignment();
                 gridHP.HorizontalAlignment = value.ToReflectedAlignment();
+                UpdateGridHPMargin();
             }
+            get { return imageSide; }
         }
+
+        private void img_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateGridHPMargin();
+        }
+
     }
     public enum Side
     {
