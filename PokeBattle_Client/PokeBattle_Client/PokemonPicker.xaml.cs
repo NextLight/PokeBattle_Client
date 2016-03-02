@@ -32,28 +32,28 @@ namespace PokeBattle_Client
                 pokeTeam = value;
                 foreach (Pokemon p in pokeTeam)
                     Items.Add(p);
-                SelectedPokemonIndex = selectedPokemonIndex;
             }
         }
 
-        // ??
-        int selectedPokemonIndex = 0;
-        public int SelectedPokemonIndex
+        public void Show(int activePokemonIndex)
         {
-            get { return selectedPokemonIndex; }
-            set
+            Visibility = Visibility.Visible;
+            if (pokeTeam != null && pokeTeam.Length > activePokemonIndex)
             {
-                selectedPokemonIndex = value;
-                Items.Insert(0, PokeTeam[selectedPokemonIndex]);
-                Items.Remove(PokeTeam[selectedPokemonIndex]);
+                Items.Insert(0, PokeTeam[activePokemonIndex]);
+                Items.Remove(PokeTeam[activePokemonIndex]);
             }
         }
 
         public event EventHandler<PickedPokemonArgs> Picked;
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (SelectedIndex != -1 && Picked != null)
-                Picked(this, new PickedPokemonArgs(pokeTeam[SelectedIndex], SelectedIndex));
+        {   
+            if (Picked != null)
+            {
+                if (SelectedIndex != -1)
+                    Picked(this, new PickedPokemonArgs(pokeTeam[SelectedIndex], SelectedIndex));
+                Visibility = Visibility.Hidden;
+            }
         }
     }
 
