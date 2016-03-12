@@ -32,6 +32,7 @@ namespace PokeBattle_Client
                 {
                     activeIndex = value;
                     pokev1.DataContext = ActivePokemon;
+                    movePick.DataContext = pokeTeam[activeIndex].Moves;
                 }
             }
         }
@@ -53,9 +54,8 @@ namespace PokeBattle_Client
             await server.Connect();
             pokeTeam = await server.ReadPokeTeam();
             opponent = await server.ReadPokemon();
-            pokev1.DataContext = pokeTeam[activeIndex];
+            ActiveIndex = 0;
             pokev2.DataContext = opponent;
-            movePick.DataContext = pokeTeam[activeIndex].Moves;
             pokePicker.PokeTeam = pokeTeam;
         }
 
@@ -69,6 +69,11 @@ namespace PokeBattle_Client
         private void pokePicker_Picked(object sender, PickedPokemonArgs e)
         {
             ActiveIndex = e.PickedIndex;
+        }
+
+        private void btnSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            pokePicker.Show(activeIndex);
         }
     }
 }
