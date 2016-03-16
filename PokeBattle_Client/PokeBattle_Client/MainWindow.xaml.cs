@@ -32,7 +32,7 @@ namespace PokeBattle_Client
                 {
                     activeIndex = value;
                     pokev1.DataContext = ActivePokemon;
-                    movePick.DataContext = pokeTeam[activeIndex].Moves;
+                    movePick.DataContext = ActivePokemon.Moves;
                 }
             }
         }
@@ -62,13 +62,20 @@ namespace PokeBattle_Client
         private async void movePick_MoveSelected(object sender, MoveSelectedArgs e)
         {
             await server.SendMove((byte)e.SelectedIndex);
-            pokeTeam[activeIndex].InBattle = await server.ReadInBattle();
-            opponent.InBattle = await server.ReadInBattle();
+            ReadInBattles();
         }
 
-        private void pokePicker_Picked(object sender, PickedPokemonArgs e)
+        private async void pokePicker_Picked(object sender, PickedPokemonArgs e)
         {
             ActiveIndex = e.PickedIndex;
+            await server.SendSwitchPokemon((byte)e.PickedIndex);
+            ReadInBattles();
+        }
+
+        private async void ReadInBattles()
+        {
+            ActivePokemon.InBattle = await server.ReadInBattle();
+            opponent.InBattle = await server.ReadInBattle();
         }
 
         private void btnSwitch_Click(object sender, RoutedEventArgs e)

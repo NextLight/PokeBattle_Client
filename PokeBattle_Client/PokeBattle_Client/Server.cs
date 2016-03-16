@@ -62,7 +62,7 @@ namespace PokeBattle_Client
             await stream.WriteAsync(new byte[] { 0, moveIdx }, 0, 2);
         }
 
-        public async Task SendChangePokemon(byte pokemonIdx)
+        public async Task SendSwitchPokemon(byte pokemonIdx)
         {
             await stream.WriteAsync(new byte[] { 1, pokemonIdx }, 0, 2);
         }
