@@ -17,6 +17,8 @@
             <local:PokemonView x:Name="pokev2" />
             <local:PokemonView x:Name="pokev1" ImageSide="Left" Grid.Row="1" />
         </Grid>
-        <local:MovePicker x:Name="movePick" Height="100" VerticalAlignment="Bottom" MoveSelected="movePick_MoveSelected" />
+        <local:MovePicker x:Name="movePick" Height="100" VerticalAlignment="Bottom" MoveSelected="movePick_MoveSelected" Margin="0,0,105,0" />
+        <local:PokemonPicker x:Name="pokePicker" Margin="80,52,82,105" Picked="pokePicker_Picked"></local:PokemonPicker>
+        <Button x:Name="btnSwitch" Content="  Switch&#xD;&#xA;Pokemon" Click="btnSwitch_Click" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100"/>
     </Grid>
 </Window>

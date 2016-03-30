@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PokemonPicker.xaml.cs">
+      <DependentUpon>PokemonPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PokemonView.xaml.cs">
       <DependentUpon>PokemonView.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
     </Compile>
     <Compile Include="Pokemon.cs" />
     <Compile Include="Server.cs" />
+    <Page Include="PokemonPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PokemonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,5 +12,5 @@
         <Label x:Name="lblLevel" Content="{Binding Level}" HorizontalAlignment="Left" Margin="181,40,0,0" VerticalAlignment="Top" Height="20" Width="42" Padding="0"/>
         <Label Content="HP" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Height="14" Padding="0" Width="15"/>
     </Grid>
-    <Image x:Name="img" Margin="10,10,10,10" HorizontalAlignment="Right" Source="{Binding Image}"/>
+    <Image x:Name="img" Margin="10,10,10,10" HorizontalAlignment="Right" Source="{Binding Image}" SizeChanged="img_SizeChanged"/>
 </Grid>

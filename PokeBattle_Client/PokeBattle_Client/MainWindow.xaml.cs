@@ -22,6 +22,24 @@ namespace PokeBattle_Client
     {
         Server server;
         Pokemon[] pokeTeam;
+        int activeIndex;
+        int ActiveIndex
+        {
+            get { return activeIndex; }
+            set
+            {
+                if (value < pokeTeam.Length)
+                {
+                    activeIndex = value;
+                    pokev1.DataContext = ActivePokemon;
+                    movePick.DataContext = ActivePokemon.Moves;
+                }
+            }
+        }
+        Pokemon ActivePokemon
+        {
+            get { return pokeTeam[activeIndex]; }
+        }
         Pokemon opponent;
 
         public MainWindow()
@@ -36,14 +54,33 @@ namespace PokeBattle_Client
             await server.Connect();
             pokeTeam = await server.ReadPokeTeam();
             opponent = await server.ReadPokemon();
-            pokev1.DataContext = pokeTeam[0];
+            ActiveIndex = 0;
             pokev2.DataContext = opponent;
-            movePick.DataContext = pokeTeam[0].Moves;
+            pokePicker.PokeTeam = pokeTeam;
         }
 
-        private void movePick_MoveSelected(object sender, MoveSelectedArgs e)
+        private async void movePick_MoveSelected(object sender, MoveSelectedArgs e)
         {
-            // TODO
+            await server.SendMove((byte)e.SelectedIndex);
+            ReadInBattles();
+        }
+
+        private async void pokePicker_Picked(object sender, PickedPokemonArgs e)
+        {
+            ActiveIndex = e.PickedIndex;
+            await server.SendSwitchPokemon((byte)e.PickedIndex);
+            ReadInBattles();
+        }
+
+        private async void ReadInBattles()
+        {
+            ActivePokemon.InBattle = await server.ReadInBattle();
+            opponent.InBattle = await server.ReadInBattle();
+        }
+
+        private void btnSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            pokePicker.Show(activeIndex);
         }
     }
 }
