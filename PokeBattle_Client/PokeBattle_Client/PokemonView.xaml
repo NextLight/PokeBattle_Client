@@ -6,7 +6,7 @@
             mc:Ignorable="d" 
             d:DesignHeight="300" d:DesignWidth="710">
     <Grid x:Name="gridHP" Margin="10,0,10,0">
-        <ProgressBar HorizontalAlignment="Left" Height="14" Margin="15,65,0,0" VerticalAlignment="Top" Width="208" Maximum="{Binding Hp}" Value="{Binding InBattle.Hp}" SmallChange="1" />
+        <ProgressBar HorizontalAlignment="Left" Height="14" Margin="15,65,0,0" VerticalAlignment="Top" Width="208" Maximum="{Binding InBattle.Stats.MaxHp}" Value="{Binding InBattle.Stats.Hp}" SmallChange="1" />
         <Label x:Name="lblName" Content="{Binding Name}" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top" Height="20" Padding="0" Width="147"/>
         <Label Content="Lv" HorizontalAlignment="Left" Margin="167,40,0,0" VerticalAlignment="Top" Height="20" Padding="0"/>
         <Label x:Name="lblLevel" Content="{Binding Level}" HorizontalAlignment="Left" Margin="181,40,0,0" VerticalAlignment="Top" Height="20" Width="42" Padding="0"/>

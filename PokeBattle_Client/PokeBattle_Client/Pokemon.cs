@@ -11,12 +11,6 @@ namespace PokeBattle_Client
         public int Level { get; set; }
         public Tuple<int, int?> Types { get; set; }
         public Move[] Moves { get; set; }
-        public int Hp { get; set; }
-        public int Attack { get; set; }
-        public int Defense { get; set; }
-        public int SpecialAttack { get; set; }
-        public int SpecialDefense { get; set; }
-        public int Speed { get; set; }
         public int Nature { get; set; }
 
         InBattleClass inBattle;
@@ -59,7 +53,21 @@ namespace PokeBattle_Client
 
     public class InBattleClass
     {
-        public int Hp { get; set; }
+        public StatsClass Stats { get; set; }
         // TODO: status modifiers
+    }
+
+    public class StatsClass
+    {
+        public int Hp { get; set; }
+
+        public int MaxHp { get; set; }
+        public int Attack { get; set; }
+        public int Defense { get; set; }
+        public int SpecialAttack { get; set; }
+        public int SpecialDefense { get; set; }
+        public int Speed { get; set; }
+        public int AccuracyStage { get; set; }
+        public int EvasionStage { get; set; }
     }
 }
