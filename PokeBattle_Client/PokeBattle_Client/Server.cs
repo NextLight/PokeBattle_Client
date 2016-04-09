@@ -35,6 +35,11 @@ namespace PokeBattle_Client
             serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
         }
 
+        public async Task<MessageType> ReadType()
+        {
+            return (MessageType)await Task.Run(() => streamReader.Read());
+        }
+
         public async Task<string> ReadLine()
         {
             return await streamReader.ReadLineAsync();
@@ -55,7 +60,7 @@ namespace PokeBattle_Client
             return serializer.Deserialize<InBattleClass>(await ReadLine());
         }
 
-        // Each turn turn the player can either use a move (0) or change the active pokemon (1)
+        // Each turn the player can either use a move (0) or change the active pokemon (1)
 
         public async Task SendMove(byte moveIdx)
         {
@@ -67,4 +72,6 @@ namespace PokeBattle_Client
             await stream.WriteAsync(new byte[] { 1, pokemonIdx }, 0, 2);
         }
     }
+
+    enum MessageType : byte { Text, ChangeOpponent, PokeTeam, InBattleUser, InBattleOpponent, BeginTurn, UserFainted }
 }
