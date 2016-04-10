@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace PokeBattle_Client
+﻿namespace PokeBattle_Client
 {
-    public enum DamageClass { None = 1, Physical, Special };
+    public enum DamageClass { None = 1, Physical, Special }
     public enum Statuses { Unknown, None, Paralysis, Sleep, Freeze, Burn, Poison, Confusion, Infatuation, Trap, Nightmare, Torment, Disable, Yawn, HealBlock, NoTypeImmunity, LeechSeed, Embargo, PerishSong, Ingrain }
     public enum StatsTarget { None, User, Opponent, Both }
 

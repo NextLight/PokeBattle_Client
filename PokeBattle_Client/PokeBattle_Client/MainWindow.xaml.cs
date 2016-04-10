@@ -1,23 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace PokeBattle_Client
 {
-    /// <summary>
-    /// Logica di interazione per MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         Server server;
@@ -36,10 +20,8 @@ namespace PokeBattle_Client
                 }
             }
         }
-        Pokemon ActivePokemon
-        {
-            get { return pokeTeam[activeIndex]; }
-        }
+        Pokemon ActivePokemon => pokeTeam[activeIndex];
+
         Pokemon opponent;
 
         public MainWindow()
@@ -91,8 +73,8 @@ namespace PokeBattle_Client
 
         private async void movePick_MoveSelected(object sender, MoveSelectedArgs e)
         {
-            await server.SendMove((byte)e.SelectedIndex);
             gridFooter.IsEnabled = false;
+            await server.SendMove((byte)e.SelectedIndex);
         }
 
         private async void pokePicker_Picked(object sender, PickedPokemonArgs e)

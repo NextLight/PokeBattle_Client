@@ -13,13 +13,13 @@ namespace PokeBattle_Client
         public Move[] Moves { get; set; }
         public int Nature { get; set; }
 
-        InBattleClass inBattle;
+        InBattleClass _inBattle;
         public InBattleClass InBattle
         {
-            get { return inBattle; }
+            get { return _inBattle; }
             set
             {
-                inBattle = value;
+                _inBattle = value;
                 OnPropertyChanged("InBattle");
             }
         }
@@ -43,10 +43,7 @@ namespace PokeBattle_Client
 
         public void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

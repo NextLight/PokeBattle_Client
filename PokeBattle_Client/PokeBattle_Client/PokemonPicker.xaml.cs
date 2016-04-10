@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PokeBattle_Client
 {
@@ -23,14 +12,13 @@ namespace PokeBattle_Client
             InitializeComponent();
         }
 
-        Pokemon[] pokeTeam;
+        Pokemon[] _pokeTeam;
         public Pokemon[] PokeTeam
         {
-            get { return pokeTeam; }
             set
             {
-                pokeTeam = value;
-                foreach (Pokemon p in pokeTeam)
+                _pokeTeam = value;
+                foreach (Pokemon p in _pokeTeam)
                     Items.Add(p);
             }
         }
@@ -38,30 +26,27 @@ namespace PokeBattle_Client
         public void Show(int activePokemonIndex)
         {
             Visibility = Visibility.Visible;
-            if (pokeTeam != null && pokeTeam.Length > activePokemonIndex)
+            if (_pokeTeam != null && _pokeTeam.Length > activePokemonIndex)
             {
-                Items.Insert(0, PokeTeam[activePokemonIndex]);
-                Items.Remove(PokeTeam[activePokemonIndex]);
+                Items.Insert(0, _pokeTeam[activePokemonIndex]);
+                Items.Remove(_pokeTeam[activePokemonIndex]);
             }
         }
 
         public event EventHandler<PickedPokemonArgs> Picked;
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {   
-            if (Picked != null)
-            {
                 if (SelectedIndex != -1)
-                    Picked(this, new PickedPokemonArgs(pokeTeam[SelectedIndex], SelectedIndex));
+                    Picked?.Invoke(this, new PickedPokemonArgs(_pokeTeam[SelectedIndex], SelectedIndex));
                 Visibility = Visibility.Hidden;
-            }
         }
     }
 
     public class PickedPokemonArgs : EventArgs
     {
-        public Pokemon PickedPokemon { get; private set; }
-        public int PickedIndex { get; private set; }
-        
+        public Pokemon PickedPokemon { get; }
+        public int PickedIndex { get; }
+
         public PickedPokemonArgs(Pokemon poke, int idx)
         {
             PickedPokemon = poke;

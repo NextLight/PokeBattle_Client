@@ -15,18 +15,15 @@ namespace PokeBattle_Client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (MoveSelected != null)
-            {
-                Button btn = (Button)sender;
-                MoveSelected(this, new MoveSelectedArgs((Move)btn.DataContext, GetRow(btn) * 2 + GetColumn(btn)));
-            }
+            var btn = (Button)sender;
+            MoveSelected?.Invoke(this, new MoveSelectedArgs((Move)btn.DataContext, GetRow(btn) * 2 + GetColumn(btn)));
         }
     }
 
     public class MoveSelectedArgs : EventArgs
     {
-        public Move SelectedMove { get; private set; }
-        public int SelectedIndex { get; private set; }
+        public Move SelectedMove { get; }
+        public int SelectedIndex { get; }
 
         public MoveSelectedArgs(Move move, int idx)
         {
