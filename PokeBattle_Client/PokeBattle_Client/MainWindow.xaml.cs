@@ -31,9 +31,9 @@ namespace PokeBattle_Client
 
         private async void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            gridConnection.Visibility = Visibility.Hidden;
             server = new Server(txtIP.Text);
             await server.Connect();
+            gridConnection.Visibility = Visibility.Hidden;
             MainLoop();
         }
 
@@ -49,6 +49,7 @@ namespace PokeBattle_Client
                     case MessageType.ChangeOpponent:
                         opponent = await server.ReadPokemon();
                         pokev2.DataContext = opponent;
+                        textBlock.Text += $"The opponent sent {opponent.Name}.\n";
                         break;
                     case MessageType.InBattleOpponent:
                         opponent.InBattle = await server.ReadInBattle();
@@ -56,15 +57,20 @@ namespace PokeBattle_Client
                     case MessageType.InBattleUser:
                         ActivePokemon.InBattle = await server.ReadInBattle();
                         break;
+                    case MessageType.OpponentFainted:
+                        textBlock.Text += opponent.Name + " opponent fainted.\n";
+                        gridAskChange.Visibility = Visibility.Visible;
+                        break;
                     case MessageType.PokeTeam: // should happen only once
                         pokeTeam = await server.ReadPokeTeam();
                         pokePicker.PokeTeam = pokeTeam;
                         ActiveIndex = 0;
                         break;
                     case MessageType.Text:
-                        textBlock.Text = await server.ReadLine();
+                        textBlock.Text += await server.ReadText();
                         break;
                     case MessageType.UserFainted:
+                        textBlock.Text += ActivePokemon.Name + " fainted. Choose another pokemon.\n";
                         pokePicker.Show(activeIndex);
                         break;
                 }
@@ -87,6 +93,18 @@ namespace PokeBattle_Client
         private void btnSwitch_Click(object sender, RoutedEventArgs e)
         {
             pokePicker.Show(activeIndex);
+        }
+
+        private void btnSwitchY_Click(object sender, RoutedEventArgs e)
+        {
+            gridAskChange.Visibility = Visibility.Hidden;
+            pokePicker.Show(activeIndex);
+        }
+
+        private async void btnSwitchN_Click(object sender, RoutedEventArgs e)
+        {
+            gridAskChange.Visibility = Visibility.Hidden;
+            await server.SendDontSwitchPokemon();
         }
     }
 }

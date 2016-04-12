@@ -12,6 +12,7 @@ namespace PokeBattle_Client
         public Tuple<int, int?> Types { get; set; }
         public Move[] Moves { get; set; }
         public int Nature { get; set; }
+        public bool Fainted => InBattle.Stats.Hp <= 0;
 
         InBattleClass _inBattle;
         public InBattleClass InBattle

@@ -12,5 +12,4 @@
             <local:PokemonView Height="100" ImageSide="Left"></local:PokemonView>
         </DataTemplate>
     </ListBox.ItemTemplate>
-
 </ListBox>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,27 +19,25 @@ namespace PokeBattle_Client
             set
             {
                 _pokeTeam = value;
-                foreach (Pokemon p in _pokeTeam)
-                    Items.Add(p);
             }
         }
 
         public void Show(int activePokemonIndex)
         {
             Visibility = Visibility.Visible;
-            if (_pokeTeam != null && _pokeTeam.Length > activePokemonIndex)
-            {
-                Items.Insert(0, _pokeTeam[activePokemonIndex]);
-                Items.Remove(_pokeTeam[activePokemonIndex]);
-            }
+            if (_pokeTeam != null && activePokemonIndex < _pokeTeam.Length)
+                ItemsSource = _pokeTeam.Where((p, i) => !p.Fainted && i != activePokemonIndex);
         }
 
         public event EventHandler<PickedPokemonArgs> Picked;
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {   
-                if (SelectedIndex != -1)
-                    Picked?.Invoke(this, new PickedPokemonArgs(_pokeTeam[SelectedIndex], SelectedIndex));
-                Visibility = Visibility.Hidden;
+        {
+            if (SelectedIndex != -1)
+            {
+                var poke = (Pokemon)SelectedItem;
+                Picked?.Invoke(this, new PickedPokemonArgs(poke, Array.IndexOf(_pokeTeam, poke)));
+            }
+            Visibility = Visibility.Hidden;
         }
     }
 
