@@ -17,13 +17,26 @@
             <local:PokemonView x:Name="pokev2" />
             <local:PokemonView x:Name="pokev1" ImageSide="Left" Grid.Row="1" />
         </Grid>
-        <TextBlock x:Name="textBlock" Margin="0,0,0,100" TextWrapping="Wrap" Height="64" VerticalAlignment="Bottom" FontSize="15"/>
+        <ScrollViewer Margin="0,0,0,100" Height="64" VerticalAlignment="Bottom">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" FontSize="15"/>
+        </ScrollViewer>
         <Grid x:Name="gridFooter" Height="100" VerticalAlignment="Bottom" IsEnabled="False">
             <local:MovePicker x:Name="movePick" MoveSelected="movePick_MoveSelected" Margin="0,0,105,0" />
             <Button x:Name="btnSwitch" Content="  Switch&#xD;&#xA;Pokemon" Click="btnSwitch_Click" HorizontalAlignment="Right" Width="100" />
         </Grid>
 
-        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Opacity="0.1" Visibility="{Binding ElementName=pokePicker, Path=Visibility}"/>
+        <Rectangle Fill="#FFF4F4F5" Opacity="0.8" Visibility="{Binding ElementName=gridAskChange, Path=Visibility}"/>
+        <Grid x:Name="gridAskChange" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions> 
+            <Label Content="Do you want to change your pokemon?" Height="29" VerticalAlignment="Top" HorizontalAlignment="Center" Width="220" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnSwitchN" Margin="5,25,2,0" Height="40" Content="No." Click="btnSwitchN_Click"/>
+            <Button x:Name="btnSwitchY" Margin="2,25,5,0" Height="40" Content="Yes!" Grid.Column="1" Click="btnSwitchY_Click"/>
+        </Grid>
+
+        <Rectangle Fill="#FFF4F4F5" Opacity="0.8" Visibility="{Binding ElementName=pokePicker, Path=Visibility}"/>
         <local:PokemonPicker x:Name="pokePicker" Margin="80,52,82,105" Picked="pokePicker_Picked"/>
     </Grid>
 </Window>

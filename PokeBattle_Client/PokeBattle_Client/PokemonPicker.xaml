@@ -9,8 +9,7 @@
              Visibility="Hidden" MouseDoubleClick="ListBox_MouseDoubleClick">
     <ListBox.ItemTemplate>
         <DataTemplate>
-            <local:PokemonView Height="100" ImageSide="Left"></local:PokemonView>
+            <local:PokemonView Height="100" ImageSide="Left" Focusable="{Binding Alive}"></local:PokemonView>
         </DataTemplate>
     </ListBox.ItemTemplate>
-
 </ListBox>
