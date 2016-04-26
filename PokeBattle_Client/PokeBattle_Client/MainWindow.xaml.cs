@@ -59,7 +59,7 @@ namespace PokeBattle_Client
                         break;
                     case MessageType.OpponentFainted:
                         textBlock.Text += opponent.Name + " opponent fainted.\n";
-                        gridAskChange.Visibility = Visibility.Visible;
+                        popAskChange.Visibility = Visibility.Visible;
                         break;
                     case MessageType.PokeTeam: // should happen only once
                         pokeTeam = await server.ReadPokeTeam();
@@ -71,7 +71,7 @@ namespace PokeBattle_Client
                         break;
                     case MessageType.UserFainted:
                         textBlock.Text += ActivePokemon.Name + " fainted. Choose another pokemon.\n";
-                        pokePicker.Show(activeIndex);
+                        pokePicker.Show(activeIndex, false);
                         break;
                 }
             }
@@ -92,18 +92,23 @@ namespace PokeBattle_Client
 
         private void btnSwitch_Click(object sender, RoutedEventArgs e)
         {
-            pokePicker.Show(activeIndex);
+            pokePicker.Show(activeIndex, true);
         }
 
         private void btnSwitchY_Click(object sender, RoutedEventArgs e)
         {
-            gridAskChange.Visibility = Visibility.Hidden;
-            pokePicker.Show(activeIndex);
+            popAskChange.Visibility = Visibility.Hidden;
+            pokePicker.Show(activeIndex, false);
         }
 
         private async void btnSwitchN_Click(object sender, RoutedEventArgs e)
         {
-            gridAskChange.Visibility = Visibility.Hidden;
+            popAskChange.Visibility = Visibility.Hidden;
+            await server.SendDontSwitchPokemon();
+        }
+
+        private async void popAskChange_Closed(object sender, System.EventArgs e)
+        {
             await server.SendDontSwitchPokemon();
         }
     }

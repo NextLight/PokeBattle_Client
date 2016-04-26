@@ -67,6 +67,7 @@
       <DependentUpon>MovePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pokemon.cs" />
+    <Compile Include="Popup.cs" />
     <Compile Include="Server.cs" />
     <Page Include="PokemonPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
