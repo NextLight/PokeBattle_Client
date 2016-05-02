@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PokeBattle_Client
 {
@@ -11,6 +12,13 @@ namespace PokeBattle_Client
         {
             InitializeComponent();
         }
+
+        static PokemonView()
+        {
+            InfoPopup = new PokemonInfo();
+        }
+
+        public static PokemonInfo InfoPopup { get; }
 
         private void UpdateGridHPMargin() =>
             gridHP.Margin = new Thickness(_imageSide == Side.Left ? img.ActualWidth + 10 : 10, 0, _imageSide == Side.Right ? img.ActualWidth + 10 : 10, 0);
@@ -32,6 +40,10 @@ namespace PokeBattle_Client
             UpdateGridHPMargin();
         }
 
+        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            InfoPopup.Show((Pokemon)DataContext);
+        }
     }
 
     public enum Side { Left, Right }

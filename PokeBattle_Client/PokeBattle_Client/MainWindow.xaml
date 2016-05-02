@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:PokeBattle_Client"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="PokeBattle_Client.MainWindow"
         Title="MainWindow" Height="600" Width="640">
-    <Grid>
+    <Grid x:Name="gridMain">
         <Grid x:Name="gridConnection" d:IsHidden="True" >
             <TextBox x:Name="txtIP" HorizontalAlignment="Center" Height="23" Margin="0,0,0,40" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Center" Width="75" Click="btnConnect_Click"/>

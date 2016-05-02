@@ -27,6 +27,7 @@ namespace PokeBattle_Client
         public MainWindow()
         {
             InitializeComponent();
+            gridMain.Children.Add(PokemonView.InfoPopup);
         }
 
         private async void btnConnect_Click(object sender, RoutedEventArgs e)
