@@ -26,7 +26,7 @@ namespace PokeBattle_Client
 
         public async Task Connect()
         {
-            await _client.ConnectAsync(IPAddress.Parse(Ip), 9073);
+            await _client.ConnectAsync(IPAddress.Parse(Ip).MapToIPv4(), 9073);
             _stream = _client.GetStream();
             _streamReader = new StreamReader(_stream);
             _serializer = new JavaScriptSerializer();

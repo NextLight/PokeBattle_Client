@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PokeBattle_Client
 {
@@ -16,7 +17,12 @@ namespace PokeBattle_Client
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
-            MoveSelected?.Invoke(this, new MoveSelectedArgs((Move)btn.DataContext, GetRow(btn) * 2 + GetColumn(btn)));
+            MoveSelected?.Invoke(this, new MoveSelectedArgs((Move)btn.DataContext, GetRow(btn) * 2 + GetColumn(btn) - 1));
+        }
+
+        private void Button_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            gridDescr.DataContext = ((Button)sender).DataContext;
         }
     }
 

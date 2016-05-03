@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PokeBattle_Client"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="300">
-    <Image x:Name="img" Margin="50,10,50,315"/>
-    <Label x:Name="lblName" Content="" Margin="50,0,50,285" VerticalAlignment="Bottom" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" FontSize="20"/>
-    <ListView x:Name="listView" Margin="145,0,145,80" Height="200" VerticalAlignment="Bottom" Foreground="Black" FontSize="16" HorizontalAlignment="Center" Background="#66FFFFFF" BorderBrush="#9A828790">
+    <Image x:Name="img" Margin="50,10,50,325"/>
+    <Label x:Name="lblName" Content="" Margin="50,0,50,295" VerticalAlignment="Bottom" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" FontSize="20"/>
+    <ListView x:Name="listView" Margin="145,0,145,90" Height="200" VerticalAlignment="Bottom" Foreground="Black" FontSize="16" HorizontalAlignment="Center" Background="#66FFFFFF" BorderBrush="#9A828790">
         <ListView.Resources>
             <Style TargetType="GridViewColumnHeader">
                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -32,5 +32,5 @@
             </GridView>
         </ListView.View>
     </ListView>
-    <local:MovePicker x:Name="moves" Margin="50,0,50,10" MoveSelected="MovePicker_MoveSelected" Height="65" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+    <local:MovePicker x:Name="moves" Margin="50,0,50,10" MoveSelected="MovePicker_MoveSelected" Height="75" Width="500" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
 </local:Popup>

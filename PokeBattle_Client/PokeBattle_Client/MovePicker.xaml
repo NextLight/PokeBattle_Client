@@ -10,11 +10,21 @@
         <RowDefinition Height="1*"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200"/>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
     </Grid.ColumnDefinitions>
-    <Button Click="Button_Click" DataContext="{Binding [0]}" Content="{Binding Name}"/>
-    <Button Grid.Column="1" Click="Button_Click" DataContext="{Binding [1]}" Content="{Binding Name}"/>
-    <Button Grid.Row="1" Click="Button_Click" DataContext="{Binding [2]}" Content="{Binding Name}"/>
-    <Button Grid.Row="1" Grid.Column="1" Click="Button_Click" DataContext="{Binding [3]}" Content="{Binding Name}"/>
+    <Grid x:Name="gridDescr" Grid.RowSpan="2">
+        <Label Content="Power:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Padding="0"/>
+        <Label Content="Accuracy:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,21,0,0" Padding="0"/>
+        <Label x:Name="lblPower" Content="{Binding Power}" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Top" Padding="0"/>
+        <Label x:Name="lblAccuracy" Content="{Binding Accuracy}" HorizontalAlignment="Left" Margin="70,21,0,0" VerticalAlignment="Top" Padding="0"/>
+        <ScrollViewer Margin="0,42,0,0" VerticalScrollBarVisibility="Hidden">
+            <TextBlock x:Name="txtDescr" Text="{Binding EffectText}" TextWrapping="Wrap"/>
+        </ScrollViewer>
+    </Grid>
+    <Button Grid.Column="1" Click="Button_Click" DataContext="{Binding [0]}" Content="{Binding Name}" PreviewMouseRightButtonDown="Button_PreviewMouseRightButtonDown"/>
+    <Button Grid.Column="2" Click="Button_Click" DataContext="{Binding [1]}" Content="{Binding Name}" PreviewMouseRightButtonDown="Button_PreviewMouseRightButtonDown"/>
+    <Button Grid.Row="1" Grid.Column="1" Click="Button_Click" DataContext="{Binding [2]}" Content="{Binding Name}" PreviewMouseRightButtonDown="Button_PreviewMouseRightButtonDown"/>
+    <Button Grid.Row="1" Grid.Column="2" Click="Button_Click" DataContext="{Binding [3]}" Content="{Binding Name}" PreviewMouseRightButtonDown="Button_PreviewMouseRightButtonDown"/>
 </Grid>
