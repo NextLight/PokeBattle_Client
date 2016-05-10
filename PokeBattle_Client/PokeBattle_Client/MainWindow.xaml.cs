@@ -44,6 +44,9 @@ namespace PokeBattle_Client
             {
                 switch (await server.ReadType())
                 {
+                    case MessageType.AcivePokemon: // should only happen on connection
+                        ActiveIndex = await server.ReadByte();
+                        break;
                     case MessageType.BeginTurn:
                         gridFooter.IsEnabled = true;
                         break;
@@ -62,7 +65,7 @@ namespace PokeBattle_Client
                         textBlock.Text += opponent.Name + " opponent fainted.\n";
                         popAskChange.Visibility = Visibility.Visible;
                         break;
-                    case MessageType.PokeTeam: // should happen only once
+                    case MessageType.PokeTeam: // should happen only on connection
                         pokeTeam = await server.ReadPokeTeam();
                         pokePicker.PokeTeam = pokeTeam;
                         ActiveIndex = 0;
