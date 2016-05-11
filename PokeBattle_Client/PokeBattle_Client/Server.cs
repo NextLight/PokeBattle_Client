@@ -33,17 +33,14 @@ namespace PokeBattle_Client
             _serializer.RegisterConverters(new List<JavaScriptConverter>() { new JSTuple2Converter<int, int?>() });
         }
 
-        public Task<byte> ReadByte() =>
-            Task.Run(() => (byte)_streamReader.Read());
-
-        public async Task<MessageType> ReadType() =>
-            (MessageType)await ReadByte();
+        public Task<MessageType> ReadType() => 
+            Task.Run(() => (MessageType)_streamReader.Read());
 
         private Task<string> ReadLine() => 
             _streamReader.ReadLineAsync();
 
         public async Task<string> ReadText() =>
-            Encoding.UTF8.GetString(Convert.FromBase64String(await ReadLine()));
+            Encoding.ASCII.GetString(Convert.FromBase64String(await ReadLine()));
 
         public async Task<Pokemon> ReadPokemon() => 
             _serializer.Deserialize<Pokemon>(await ReadLine());
@@ -66,5 +63,5 @@ namespace PokeBattle_Client
             _stream.WriteAsync(new byte[] { 2, 0 }, 0, 2);
     }
 
-    enum MessageType : byte { AcivePokemon, Text, ChangeOpponent, PokeTeam, InBattleUser, InBattleOpponent, BeginTurn, UserFainted, OpponentFainted }
+    enum MessageType : byte { Text, ChangeOpponent, PokeTeam, InBattleUser, InBattleOpponent, BeginTurn, UserFainted, OpponentFainted }
 }
