@@ -40,7 +40,7 @@ namespace PokeBattle_Client
             _streamReader.ReadLineAsync();
 
         public async Task<string> ReadText() =>
-            Encoding.ASCII.GetString(Convert.FromBase64String(await ReadLine()));
+            Encoding.UTF8.GetString(Convert.FromBase64String(await ReadLine()));
 
         public async Task<Pokemon> ReadPokemon() => 
             _serializer.Deserialize<Pokemon>(await ReadLine());
